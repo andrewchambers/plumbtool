@@ -95,6 +95,3 @@
     (os/exit 0))
   (os/exit 0))
 
-# TODO match files:line number and open editor.
-# TODO match file at error strings and open editor.
-# TODO match browser and open.
