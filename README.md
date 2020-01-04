@@ -3,6 +3,12 @@ A window manager command runner and plumbing tool.
 
 With plumbtool you can connect window manager hotkeys to a programmable janet script.
 
+With plumbtool you can do things like:
+
+- Open a browser for url any text on screen.
+- Open a a text editor for compiler errors anywhere on screen.
+- Anything you can program.
+
 See below for examples...
 
 # Install
@@ -86,9 +92,6 @@ tmux new -s repl
 
 When you type ctrl+r the selected text will be sent to a tmux session named repl.
 When you type ctrl+g when a url is selected, your browser will open.
-
-Obviously you can extend this to do things like open compiler error messages and other
-handy actions.
 
 ## Env vars
 
