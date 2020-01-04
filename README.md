@@ -73,8 +73,11 @@ ctrl+r -> plumbtool repl
 ctrl+g -> plumbtool go
 ```
 
-When you type ctrl+r the selected text will be sent to your repl.
+When you type ctrl+r the selected text will be sent to a tmux session named repl.
 When you type ctrl+g when a url is selected, your browser will open.
+
+Obviously you can extend this to do things like open compiler error messages and other
+handy actions.
 
 ## Env vars
 
