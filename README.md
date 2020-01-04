@@ -14,11 +14,15 @@ Install:
 - https://github.com/andrewchambers/janet-sh
 - xclip, coreutils and xdotool
 
-Then do something like:
+Can be done with something like this after setting up your JANET_PATH:
 
 ```
-cp plumbtool.janet /bin/plumbtool
-chmod +x /bin/plumbtool
+git clone https://github.com/andrewchambers/plumbtool
+cd plumbtool
+jpm update-pkgs
+jpm install process
+jpm install sh
+jpm install 
 ```
 
 Currently, the only supported platform is linux with x11, but patches are welcome.
