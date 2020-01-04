@@ -38,7 +38,7 @@
 (def cwd-peg ~{
   :main
     (choice
-      (sequence "ac@black: " (cmt (capture (any 1)) ,extract-cwd))
+      (sequence :a+ "@" :a+ ": " (cmt (capture (any 1)) ,extract-cwd))
       (sequence 
         (cmt (capture (some (sequence (not " - Sublime Text") 1))) ,extract-cwd) " - Sublime Text"))
   })
@@ -81,11 +81,14 @@
   (peg/match fmatch-peg s))
 
 (when (= (get invocation 0) "repl")
+  (print "repl...")
   (sh/$ ["tmux" "send" "-t" "repl.0" "-l" selection])
   (sh/$ ["tmux" "send" "-t" "repl.0" "Enter"])
   (os/exit 0))
 
 (when (= (get invocation 0) "go")
+  (print "go...")
+  (print "cwd=" cwd)
   (when-let [f (match-local-file selection)]
     (sh/$ ["subl" "-b" (string/join f ":")])
     (os/exit 0))
