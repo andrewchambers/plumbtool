@@ -33,6 +33,8 @@ Currently, the only supported platform is linux with x11, but patches are welcom
 plumbtool $ARGS
 ```
 
+See the contrib directory, or below for examples.
+
 ## Example
 
 ### A universal repl and url opener
@@ -75,6 +77,11 @@ Then from your window manager, bind the following hotkeys:
 ```
 ctrl+r -> plumbtool repl
 ctrl+g -> plumbtool go
+```
+
+Start a repl terminal session with:
+```
+tmux new -s repl
 ```
 
 When you type ctrl+r the selected text will be sent to a tmux session named repl.
