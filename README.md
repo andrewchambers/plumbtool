@@ -12,6 +12,7 @@ Install:
 - https://github.com/janet-lang/janet
 - https://github.com/andrewchambers/janet-process
 - https://github.com/andrewchambers/janet-sh
+- xclip, coreutils and xdotool
 
 Then do something like:
 
@@ -19,6 +20,8 @@ Then do something like:
 cp plumbtool.janet /bin/plumbtool
 chmod +x /bin/plumbtool
 ```
+
+Currently, the only supported platform is linux with x11, but patches are welcome.
 
 # Usage
 
