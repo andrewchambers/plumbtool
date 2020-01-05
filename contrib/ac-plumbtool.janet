@@ -82,8 +82,9 @@
 
 (when (= (get invocation 0) "repl")
   (print "repl...")
-  (sh/$ ["tmux" "send" "-t" "repl.0" "-l" selection])
-  (sh/$ ["tmux" "send" "-t" "repl.0" "Enter"])
+  (each input-line (string/split "\n" selection)
+    (sh/$ ["tmux" "send" "-t" "repl.0" "-l" input-line])
+    (sh/$ ["tmux" "send" "-t" "repl.0" "Enter"]))
   (os/exit 0))
 
 (when (= (get invocation 0) "go")
