@@ -21,10 +21,10 @@
   (string 
     (case (get p 0)
       ("/" 0)
-        (sh/$$ ["readlink" "-n" "-m" p])
+        (sh/$< "readlink" "-n" "-m" ,p)
       ("~" 0)
-        (sh/$$ ["readlink" "-n" "-m" (string (os/getenv "HOME") "/" (string/slice p 1))])
-      (sh/$$ ["readlink" "-n" "-m" (string rel-to "/" p)]))))
+        (sh/$< "readlink" "-n" "-m" (string (os/getenv "HOME") "/" (string/slice p 1)))
+      (sh/$< "readlink" "-n" "-m" (string rel-to "/" p)))))
 
 (defn extract-cwd
   [p]
@@ -33,7 +33,7 @@
      st (os/stat p)]
     (if (= (get st :mode) :directory)
       p
-      (string (sh/$$_ ["dirname" p])))))
+      (string (sh/$<_ "dirname" ,p)))))
 
 (def cwd-peg ~{
   :main
@@ -66,7 +66,7 @@
         (sequence ":" (capture :d+) ":" (capture :d+))
         (sequence ":" (capture :d+) ":")
         (sequence ":" (capture :d+))
-        (sequence "] on line " (capture :d+) ", column " (capture :d+)))
+        (sequence "]" (opt " (tailcall)") " on line " (capture :d+) ", column " (capture :d+)))
 
     :fname 
         (cmt (capture (some (sequence (not :pos) 1))) ,is-local-file)
@@ -83,19 +83,19 @@
 (when (= (get invocation 0) "repl")
   (print "repl...")
   (each input-line (string/split "\n" selection)
-    (sh/$ ["tmux" "send" "-t" "repl.0" "-l" input-line])
-    (sh/$ ["tmux" "send" "-t" "repl.0" "Enter"]))
+    (sh/$ tmux send -t repl.0 -l ,input-line)
+    (sh/$ tmux send -t repl.0 Enter))
   (os/exit 0))
 
 (when (= (get invocation 0) "go")
   (print "go...")
   (print "cwd=" cwd)
   (when-let [f (match-local-file selection)]
-    (sh/$ ["subl" "-b" (string/join f ":")])
+    (sh/$ subl -b (string/join f ":"))
     (os/exit 0))
   (when (or (string/has-prefix? "http://" selection)
             (string/has-prefix? "https://" selection))
-    (sh/$ ["xdg-open" selection])
+    (sh/$ xdg-open ,selection)
     (os/exit 0))
   (os/exit 0))
 
