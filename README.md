@@ -16,7 +16,6 @@ See below for examples...
 Install:
 
 - https://github.com/janet-lang/janet
-- https://github.com/andrewchambers/janet-process
 - https://github.com/andrewchambers/janet-sh
 - xclip, coreutils and xdotool
 
